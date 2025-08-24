@@ -27,10 +27,8 @@ export default function PreviewPage() {
   };
 
   const handleSubmit = () => {
-    // In a real app, this would submit the image for analysis
-    // For now, we'll just show a success message
-    alert('Image submitted successfully! Redirecting to analysis...');
-    router.push('/');
+    // Redirect to analytics page for skin analysis
+    router.push(`/analytics?image=${encodeURIComponent(imageData!)}`);
   };
 
   if (!imageData || !status) {

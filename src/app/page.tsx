@@ -93,17 +93,16 @@ export default function Home() {
               <div className="mx-auto h-[139px] w-[149px] grid place-items-center mb-6">
                 {/* placeholder for scan/face thumbnail */}
                 <div className="h-[139px] w-[149px] rounded bg-white border border-dashed border-gray-300 grid place-items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-14 w-14 text-gray-400">
-                    <path d="M12 14.25a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
-                    <path d="M4.5 8.25a7.5 7.5 0 1 1 15 0c0 4.142-3.358 10.5-7.5 10.5S4.5 12.392 4.5 8.25Z" />
-                  </svg>
+                  <img src="https://freesvg.org/img/Low-Poly-Female-Head-Wireframe.png" alt="Female head wireframe" className="h-full w-full text-gray-400" />
+                   
+                 
                 </div>
               </div>
 
               <h2 className="text-[#1F2937] font-semibold text-[18px] text-center">
                 Upload Your Selfie
               </h2>
-
+ 
               <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <button 
                   onClick={handleCaptureSelfie}
@@ -128,6 +127,16 @@ export default function Home() {
                 Don&apos;t want to use a photo? {" "}
                 <a href="#" className="text-[#22747D] underline">Take our questionnaire instead.</a>
               </p>
+              
+              {/* Test Analytics Link - Remove in production */}
+              <div className="mt-4 pt-4 border-t border-gray-200">
+                <button 
+                  onClick={() => router.push('/analytics')}
+                  className="w-full px-4 py-2 text-xs text-gray-500 border border-gray-300 rounded hover:bg-gray-50 transition-colors"
+                >
+                  🧪 Test Analytics Page (Dev Only)
+                </button>
+              </div>
             </div>
           </div>
 

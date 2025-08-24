@@ -11,7 +11,6 @@ export default function CapturePage() {
   const [isLoading, setIsLoading] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
-  const router = useRouter();
 
   useEffect(() => {
     startCamera();
@@ -80,22 +79,10 @@ export default function CapturePage() {
     }
   };
 
-  const handleLoadingComplete = () => {
-    // Simulate analysis - in real app, this would send to backend
-    // For now, we'll simulate a random success/error
-    const isSuccess = Math.random() > 0.3; // 70% success rate
-    
-    if (isSuccess) {
-      // Navigate to preview page with success
-      router.push(`/preview?image=${encodeURIComponent(capturedImage!)}&status=success`);
-    } else {
-      // Navigate to preview page with error
-      router.push(`/preview?image=${encodeURIComponent(capturedImage!)}&status=error`);
-    }
-  };
+
 
   if (isLoading) {
-    return <LoadingScreen onComplete={handleLoadingComplete} />;
+    return <LoadingScreen capturedImage={capturedImage!} />;
   }
 
   if (capturedImage) {
@@ -201,7 +188,7 @@ export default function CapturePage() {
         )}
         
         <button
-          onClick={() => router.back()}
+          onClick={() => window.history.back()}
           className="w-full px-4 py-2 border border-gray-300 text-gray-600 bg-white rounded-lg hover:bg-gray-50 transition-colors"
         >
           Back

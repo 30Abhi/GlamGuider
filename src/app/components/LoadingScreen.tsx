@@ -4,12 +4,14 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 interface LoadingScreenProps {
-  onComplete: () => void;
+  capturedImage: string;
 }
 
-export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
+export default function LoadingScreen({ capturedImage }: LoadingScreenProps) {
   const [progress, setProgress] = useState(0);
   const [currentStatus, setCurrentStatus] = useState(0);
+  const [scanPosition, setScanPosition] = useState(0);
+  const router = useRouter();
   
   const statusMessages = [
     "Detecting signs of pigmentation and uneven tone...",
@@ -38,13 +40,26 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
       if (newProgress >= 100) {
         clearInterval(timer);
         setTimeout(() => {
-          onComplete();
+          // Redirect directly to analytics page
+          router.push(`/analytics`);
         }, 500); // Small delay before redirecting
       }
     }, interval);
 
     return () => clearInterval(timer);
-  }, [onComplete]);
+  }, []);
+
+  // Scanning animation effect
+  useEffect(() => {
+    const scanTimer = setInterval(() => {
+      setScanPosition(prev => {
+        if (prev >= 100) return 0;
+        return prev + 1;
+      });
+    }, 30);
+
+    return () => clearInterval(scanTimer);
+  }, []);
 
   return (
     <div className="min-h-screen bg-white flex">
@@ -74,14 +89,20 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
 
           {/* Icon/Animation */}
           <div className="relative mb-8">
-            {/* Horizontal line above */}
-            <div className="w-32 h-1 bg-[#4CAF50] mx-auto mb-4"></div>
-            
-            {/* Main circle with icon */}
+            {/* Main circle with person icon */}
             <div className="w-32 h-32 mx-auto rounded-full border-2 border-[#4CAF50] bg-[#E8F5E8] flex items-center justify-center relative">
-              <div className="w-20 h-20 bg-[#4CAF50] rounded-lg flex items-center justify-center">
+              {/* Scanning line that moves up and down over the person icon */}
+              <div 
+                className="absolute w-full h-1 bg-[#4CAF50] opacity-80 transition-all duration-75 ease-linear"
+                style={{ 
+                  top: `${scanPosition}%`,
+                  transform: 'translateY(-50%)'
+                }}
+              ></div>
+              
+              <div className="w-20 h-20 bg-[#4CAF50] rounded-full flex items-center justify-center relative z-10">
                 <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 1H5C3.89 1 3 1.89 3 3V21C3 22.11 3.89 23 5 23H19C20.11 23 21 22.11 21 21V9M19 9H14V4H5V21H19V9Z"/>
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                 </svg>
               </div>
             </div>

@@ -2,12 +2,13 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import SiteHeader from "./SiteHeader";
 
 interface LoadingScreenProps {
   capturedImage: string;
 }
 
-export default function LoadingScreen({ capturedImage }: LoadingScreenProps) {
+export default function LoadingScreen() {
   const [progress, setProgress] = useState(0);
   const [currentStatus, setCurrentStatus] = useState(0);
   const [scanPosition, setScanPosition] = useState(0);
@@ -62,35 +63,28 @@ export default function LoadingScreen({ capturedImage }: LoadingScreenProps) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white flex">
+    <div className="min-h-screen bg-white">
+      <SiteHeader />
+      <div className="flex flex-col lg:flex-row gap-8 sm:gap-16">
       {/* Left Section - Content */}
-      <div className="w-1/2 flex flex-col items-center justify-center p-8">
+      <div className="w-full lg:w-1/2 flex flex-col items-center justify-center p-4 sm:p-8">
         <div className="text-center max-w-md">
-          {/* Logo */}
-          <div className="mb-12">
-            <h1 className="text-3xl font-bold">
-              <span className="text-[#22747D]">Glam</span>
-              <span className="text-[#4CAF50]">Guider</span>
-              <span className="text-xs align-top">™</span>
-            </h1>
-          </div>
-
           {/* Title */}
-          <h2 className="text-3xl font-bold text-gray-800 mb-4">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-3 sm:mb-4">
             Analyzing Your Skin
           </h2>
 
           {/* Description */}
-          <p className="text-gray-600 text-lg mb-8">
+          <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8">
             Our AI is evaluating your skin's unique needs.
-            <br />
+            <br className="hidden sm:block" />
             This will only take a moment.
           </p>
 
           {/* Icon/Animation */}
-          <div className="relative mb-8">
+          <div className="relative mb-6 sm:mb-8">
             {/* Main circle with person icon */}
-            <div className="w-32 h-32 mx-auto rounded-full border-2 border-[#4CAF50] bg-[#E8F5E8] flex items-center justify-center relative">
+            <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto rounded-full border-2 border-[#4CAF50] bg-[#E8F5E8] flex items-center justify-center relative">
               {/* Scanning line that moves up and down over the person icon */}
               <div 
                 className="absolute w-full h-1 bg-[#4CAF50] opacity-80 transition-all duration-75 ease-linear"
@@ -100,34 +94,56 @@ export default function LoadingScreen({ capturedImage }: LoadingScreenProps) {
                 }}
               ></div>
               
-              <div className="w-20 h-20 bg-[#4CAF50] rounded-full flex items-center justify-center relative z-10">
-                <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#4CAF50] rounded-full flex items-center justify-center relative z-10">
+                <svg className="w-10 h-10 sm:w-12 sm:h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                 </svg>
               </div>
             </div>
             
             {/* Glow effect */}
-            <div className="absolute inset-0 w-32 h-32 mx-auto rounded-full bg-[#4CAF50] opacity-20 blur-xl"></div>
+            <div className="absolute inset-0 w-24 h-24 sm:w-32 sm:h-32 mx-auto rounded-full bg-[#4CAF50] opacity-20 blur-xl"></div>
           </div>
 
           {/* Progress Bar */}
-          <div className="w-full bg-gray-200 rounded-full h-3 mb-4">
+          <div className="w-full bg-gray-200 rounded-full h-2 sm:h-3 mb-3 sm:mb-4">
             <div 
-              className="bg-[#4CAF50] h-3 rounded-full transition-all duration-300 ease-out"
+              className="bg-[#4CAF50] h-2 sm:h-3 rounded-full transition-all duration-300 ease-out"
               style={{ width: `${progress}%` }}
             ></div>
           </div>
 
           {/* Status Text */}
-          <p className="text-gray-600 text-sm">
+          <p className="text-gray-600 text-xs sm:text-sm">
             {statusMessages[currentStatus]}
           </p>
         </div>
       </div>
 
-      {/* Right Section - Empty */}
-      <div className="w-1/2 bg-white"></div>
+      {/* Right Section - Image Placeholder */}
+      <div className="w-full lg:w-1/2 bg-white flex items-center justify-center p-4 sm:p-8">
+        <div className="w-full max-w-[540px] h-48 sm:h-64 lg:h-[360px] border-2 border-dashed border-gray-300 rounded-lg grid place-items-center text-gray-400">
+          <div className="text-center">
+            <svg className="w-8 h-8 sm:w-10 sm:h-10 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7l9-4 9 4-9 4-9-4zm0 0v10l9 4 9-4V7" />
+            </svg>
+            <p className="text-xs sm:text-sm">Right-side image placeholder</p>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      {/* Bottom Banner Placeholder */}
+      <div className="px-4 sm:px-8 pb-4 sm:pb-8 mt-8 sm:mt-12">
+        <div className="w-full h-32 sm:h-[180px] border-2 border-dashed border-gray-300 rounded-lg grid place-items-center text-gray-400">
+          <div className="text-center">
+            <svg className="w-8 h-8 sm:w-10 sm:h-10 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16v12H4z" />
+            </svg>
+            <p className="text-xs sm:text-sm">Bottom banner placeholder</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

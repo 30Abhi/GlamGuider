@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import SiteHeader from "../../components/SiteHeader";
 
 // Data interfaces for API integration
 interface SkinAnalysis {
@@ -135,7 +136,7 @@ const mockData: SkinAnalysis = {
 };
 
 // Circular Progress Component
-const CircularProgress = ({ score, size = 60, strokeWidth = 6, color = "#22747D" }: { 
+const CircularProgress = ({ score, size = 60, strokeWidth = 6, color = "#007237" }: { 
   score: number; 
   size?: number; 
   strokeWidth?: number; 
@@ -183,13 +184,6 @@ const CircularProgress = ({ score, size = 60, strokeWidth = 6, color = "#22747D"
 export default function AnalyticsPage() {
   const router = useRouter();
   const [data, setData] = useState<SkinAnalysis>(mockData);
-  const [activeProductCategory, setActiveProductCategory] = useState("Cleansers");
-
-  // Get unique product categories
-  const productCategories = Array.from(new Set(data.products.map(p => p.category)));
-
-  // Filter products by active category
-  const filteredProducts = data.products.filter(p => p.category === activeProductCategory);
 
   // Function to get color based on score
   const getScoreColor = (score: number) => {
@@ -209,334 +203,314 @@ export default function AnalyticsPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-full bg-gradient-to-r from-[#22747D] to-[#4CAF50]" />
-              <span className="text-xl font-semibold tracking-tight">
-                Glam<span className="text-[#4CAF50]">Guider</span>™
-              </span>
-            </div>
-            <button
-              onClick={() => router.push('/')}
-              className="text-gray-600 hover:text-gray-900 transition-colors"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* First Part: Buttons and Skin at Glance */}
-        <div className="mb-12">
+        <div className="mb-8 sm:mb-12">
           {/* Main Title and Action Buttons */}
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-4 lg:mb-0">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6 sm:mb-8">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 lg:mb-0">
               Hi {data.user.name}, Here's Your <span className="underline decoration-blue-500 decoration-2">Skin Report</span>
             </h1>
             <div className="flex flex-col sm:flex-row gap-3">
-              <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition-colors">
+              <button className="flex items-center gap-2 px-3 sm:px-4 py-2 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition-colors text-sm">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                 </svg>
-                Retake Analysis
+                <span className="hidden sm:inline">Retake Analysis</span>
+                <span className="sm:hidden">Retake</span>
               </button>
-              <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition-colors">
+              <button className="flex items-center gap-2 px-3 sm:px-4 py-2 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition-colors text-sm">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
-                Download Report
+                <span className="hidden sm:inline">Download Report</span>
+                <span className="sm:hidden">Download</span>
               </button>
-              <button className="flex items-center gap-2 px-4 py-2 bg-[#22747D] text-white rounded-lg hover:bg-[#1a5a61] transition-colors">
+              <button className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-[#007237] text-white rounded-lg hover:bg-[#00662f] transition-colors text-sm">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                 </svg>
-                Talk to Dermatologist
+                <span className="hidden sm:inline">Talk to Dermatologist</span>
+                <span className="sm:hidden">Talk to Derm</span>
               </button>
             </div>
           </div>
 
           {/* Your Skin at a Glance */}
-          <div className="mb-8">
-            <h2 className="text-xl font-bold text-gray-900 mb-6">Your Skin at a Glance</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {/* Overall Skin Health Score */}
-              <div className="bg-white border border-gray-200 rounded-lg p-6">
-                <div className="flex items-center justify-between mb-4">
-                                    <div className="relative w-24 h-24">
-                    <svg className="w-24 h-24 " viewBox="0 0 100 50">
-                      {/* Background arc */}
-                      <path
-                        d="M10,50 A40,40 0 0,1 90,50"
-                        fill="none"
-                        stroke="#e5e7eb"
-                        strokeWidth="8"
-                      />
-                      {/* Progress arc */}
-                      <path
-                        d="M10,50 A40,40 0 0,1 90,50"
-                        fill="none"
-                        stroke="url(#gradient)"
-                        strokeWidth="8"
-                        strokeDasharray="125.6"
-                        strokeDashoffset={125.6 - (data.user.overallScore / 100) * 125.6}
-                        strokeLinecap="round"
-                      />
-                      <defs>
-                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                          <stop offset="0%" stopColor="#22747D" />
-                          <stop offset="100%" stopColor="#4CAF50" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-2xl font-bold text-gray-900">{data.user.overallScore}</span>
-                    </div>
-                  </div>
-                  <div className="flex-1 ml-4">
-                    <h3 className="font-bold text-gray-900 mb-2">Overall Skin Health Score</h3>
-                    <p className="text-sm text-gray-600">Your skin health is above average. We've identified some minor concerns that can be addressed with the right products.</p>
-                  </div>
-                </div>
-              </div>
+          <div className="mb-6 sm:mb-8">
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-6 sm:mb-8">Your Skin at a Glance</h2>
+                         <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6">
+               {/* Overall Skin Health Score */}
+               <div className="lg:col-span-2 bg-white border border-gray-200 rounded-lg p-3 sm:p-4">
+                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                   <div className="relative w-20 h-12 sm:w-24 sm:h-16 mx-auto sm:mx-0 mb-3 sm:mb-0"> {/* keep original size */}
+                     <svg className="w-20 h-12 sm:w-24 sm:h-16" viewBox="0 0 120 60">
+                       {/* Background arc */}
+                       <path
+                         d="M10,60 A50,50 0 0,1 110,60"
+                         fill="none"
+                         stroke="#e5e7eb"
+                         strokeWidth="10"
+                       />
+                       {/* Progress arc */}
+                       <path
+                         d="M10,60 A50,50 0 0,1 110,60"
+                         fill="none"
+                         stroke="url(#gradient)"
+                         strokeWidth="10"
+                         strokeDasharray="157"
+                         strokeDashoffset={157 - (data.user.overallScore / 100) * 157}
+                         strokeLinecap="round"
+                       />
+                       <defs>
+                         <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                           <stop offset="0%" stopColor="#007237" />
+                           <stop offset="100%" stopColor="#4CAF50" />
+                         </linearGradient>
+                       </defs>
+                     </svg>
+                     {/* Move score downward */}
+                     <div className="absolute inset-0 flex items-end justify-center pb-1">
+                       <span className="text-lg sm:text-xl font-bold text-gray-900">
+                         {data.user.overallScore}
+                       </span>
+                     </div>
+                   </div>
 
-              {/* Your Detected Skin Type */}
-              <div className="bg-white border border-gray-200 rounded-lg p-6">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                    </svg>
-                  </div>
-                  <h3 className="font-bold text-gray-900">Your Detected Skin Type</h3>
-                </div>
-                <div className="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">{data.user.skinType}</div>
-              </div>
+                   <div className="flex-1 sm:ml-3 text-center sm:text-left">
+                     <h3 className="font-bold text-gray-900 mb-1 text-sm">
+                       Overall Skin Health Score
+                     </h3>
+                     <p className="text-xs text-gray-600">
+                       Your skin health is above average. We've identified some minor concerns
+                       that can be addressed with the right products.
+                     </p>
+                   </div>
+                 </div>
+               </div>
 
-              {/* Primary Concern */}
-              <div className="bg-white border border-gray-200 rounded-lg p-6">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
-                    </svg>
-                  </div>
-                  <h3 className="font-bold text-gray-900">Primary Concern</h3>
-                </div>
-                <p className="text-sm text-gray-700">{data.user.primaryConcern}</p>
-              </div>
+               {/* Combined Information Panel */}
+               <div className="lg:col-span-3 bg-gray-50 border border-gray-200 rounded-lg p-3 sm:p-4">
+                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                   {/* Your Detected Skin Type */}
+                   <div className="relative">
+                     <div className="flex items-center gap-2 sm:gap-3 mb-2">
+                       <div className="w-5 h-5 sm:w-6 sm:h-6 bg-blue-100 rounded-full flex items-center justify-center">
+                         <svg className="w-3 h-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                         </svg>
+                       </div>
+                       <h3 className="font-bold text-gray-900 text-xs sm:text-sm">Your Detected Skin Type</h3>
+                     </div>
+                     <div className="inline-block px-2 py-1 bg-gray-100 text-gray-700 rounded-full text-xs">{data.user.skinType}</div>
+                     {/* Vertical separator */}
+                     <div className="absolute right-0 top-0 bottom-0 w-px bg-gray-300 hidden sm:block"></div>
+                   </div>
 
-              {/* Secondary Concerns */}
-              <div className="bg-white border border-gray-200 rounded-lg p-6">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
-                    </svg>
-                  </div>
-                  <h3 className="font-bold text-gray-900">Secondary Concerns</h3>
-                </div>
-                <p className="text-sm text-gray-700">{data.user.secondaryConcerns.join(", ")}</p>
-              </div>
-            </div>
+                   {/* Primary Concern */}
+                   <div className="relative">
+                     <div className="flex items-center gap-2 sm:gap-3 mb-2">
+                       <div className="w-5 h-5 sm:w-6 sm:h-6 bg-red-100 rounded-full flex items-center justify-center">
+                         <svg className="w-3 h-3 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                         </svg>
+                       </div>
+                       <h3 className="font-bold text-gray-900 text-xs sm:text-sm">Primary Concern</h3>
+                     </div>
+                     <p className="text-xs text-gray-700">{data.user.primaryConcern}</p>
+                     {/* Vertical separator */}
+                     <div className="absolute right-0 top-0 bottom-0 w-px bg-gray-300 hidden sm:block"></div>
+                   </div>
+
+                   {/* Secondary Concerns */}
+                   <div>
+                     <div className="flex items-center gap-2 sm:gap-3 mb-2">
+                       <div className="w-5 h-5 sm:w-6 sm:h-6 bg-yellow-100 rounded-full flex items-center justify-center">
+                         <svg className="w-4 h-4 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                         </svg>
+                       </div>
+                       <h3 className="font-bold text-gray-900 text-xs sm:text-sm">Secondary Concerns</h3>
+                     </div>
+                     <p className="text-xs text-gray-700">{data.user.secondaryConcerns.join(", ")}</p>
+                   </div>
+                 </div>
+               </div>
+             </div>
           </div>
         </div>
 
         {/* Second Part: Overall Skin Health */}
-        <div className="mb-12">
-          <div className="bg-white border border-gray-200 rounded-lg p-6">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="mb-6 sm:mb-8">
+          <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6">
+            <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+              <div className="w-6 h-6 sm:w-8 sm:h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
               </div>
-              <h2 className="text-2xl font-bold text-gray-900">Overall Skin Health</h2>
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Overall Skin Health</h2>
             </div>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
               {/* Visual Representation */}
               <div className="relative">
-                <div className="w-full h-80 bg-gray-100 rounded-lg border border-gray-200 flex items-center justify-center">
+                <div className="w-full max-w-sm sm:w-80 h-40 sm:h-50 bg-gray-100 rounded-lg border border-gray-200 flex items-center justify-center">
                   <div className="text-center text-gray-500">
-                    <svg className="w-16 h-16 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
-                    <p>Skin Analysis Visualization</p>
-                    <p className="text-sm">(Will be integrated with AI analysis)</p>
+                    <p className="text-sm sm:text-base">Skin Analysis Visualization</p>
+                    <p className="text-xs sm:text-sm">(Will be integrated with AI analysis)</p>
                   </div>
                 </div>
               </div>
 
               {/* Skin Health Metrics */}
-              <div className="grid grid-cols-1 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 {/* Column 1: Skin Clarity & Texture */}
-                <div>
-                  <h3 className="font-bold text-gray-900 mb-4">Skin Clarity & Texture</h3>
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-700">Pores</span>
-                      <div className="flex items-center gap-3">
-                        <CircularProgress 
-                          score={data.metrics.skinClarity.pores} 
-                          size={50} 
-                          strokeWidth={4} 
-                          color={getScoreColor(data.metrics.skinClarity.pores)} 
-                        />
-                        <span className="text-sm font-medium">{data.metrics.skinClarity.pores}</span>
-                      </div>
+                <div className="relative">
+                  <h3 className="font-bold text-gray-900 mb-3 sm:mb-4 text-sm sm:text-base">Skin Clarity & Texture</h3>
+                  <div className="space-y-3 sm:space-y-4">
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <CircularProgress 
+                        score={data.metrics.skinClarity.pores} 
+                        size={40} 
+                        strokeWidth={3} 
+                        color={getScoreColor(data.metrics.skinClarity.pores)} 
+                      />
+                      <span className="text-xs sm:text-sm text-gray-700">Pores</span>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-700">Acne</span>
-                      <div className="flex items-center gap-3">
-                        <CircularProgress 
-                          score={data.metrics.skinClarity.acne} 
-                          size={50} 
-                          strokeWidth={4} 
-                          color={getScoreColor(data.metrics.skinClarity.acne)} 
-                        />
-                        <span className="text-sm font-medium">{data.metrics.skinClarity.acne}</span>
-                      </div>
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <CircularProgress 
+                        score={data.metrics.skinClarity.acne} 
+                        size={40} 
+                        strokeWidth={3} 
+                        color={getScoreColor(data.metrics.skinClarity.acne)} 
+                      />
+                      <span className="text-xs sm:text-sm text-gray-700">Acne</span>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-700 underline cursor-pointer">Pigmentation</span>
-                      <div className="flex items-center gap-3">
-                        <CircularProgress 
-                          score={data.metrics.skinClarity.pigmentation} 
-                          size={50} 
-                          strokeWidth={4} 
-                          color={getScoreColor(data.metrics.skinClarity.pigmentation)} 
-                        />
-                        <span className="text-sm font-medium">{data.metrics.skinClarity.pigmentation}</span>
-                      </div>
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <CircularProgress 
+                        score={data.metrics.skinClarity.pigmentation} 
+                        size={40} 
+                        strokeWidth={3} 
+                        color={getScoreColor(data.metrics.skinClarity.pigmentation)} 
+                      />
+                      <span className="text-xs sm:text-sm text-gray-700 underline cursor-pointer">Pigmentation</span>
                     </div>
                   </div>
+                  {/* Vertical separator */}
+                  <div className="absolute right-0 top-0 bottom-0 w-px bg-gray-200 hidden sm:block"></div>
                 </div>
 
                 {/* Column 2: Signs of Aging */}
-                <div>
-                  <h3 className="font-bold text-gray-900 mb-4">Signs of Aging</h3>
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-700">Wrinkles & Fine Lines</span>
-                      <div className="flex items-center gap-3">
-                        <CircularProgress 
-                          score={data.metrics.aging.wrinkles} 
-                          size={50} 
-                          strokeWidth={4} 
-                          color={getScoreColor(data.metrics.aging.wrinkles)} 
-                        />
-                        <span className="text-sm font-medium">{data.metrics.aging.wrinkles}</span>
-                      </div>
+                <div className="relative">
+                  <h3 className="font-bold text-gray-900 mb-3 sm:mb-4 text-sm sm:text-base">Signs of Aging</h3>
+                  <div className="space-y-3 sm:space-y-4">
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <CircularProgress 
+                        score={data.metrics.aging.wrinkles} 
+                        size={40} 
+                        strokeWidth={3} 
+                        color={getScoreColor(data.metrics.aging.wrinkles)} 
+                      />
+                      <span className="text-xs sm:text-sm text-gray-700">Wrinkles & Fine Lines</span>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-700">Sagging</span>
-                      <div className="flex items-center gap-3">
-                        <CircularProgress 
-                          score={data.metrics.aging.sagging} 
-                          size={50} 
-                          strokeWidth={4} 
-                          color={getScoreColor(data.metrics.aging.sagging)} 
-                        />
-                        <span className="text-sm font-medium">{data.metrics.aging.sagging}</span>
-                      </div>
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <CircularProgress 
+                        score={data.metrics.aging.sagging} 
+                        size={40} 
+                        strokeWidth={3} 
+                        color={getScoreColor(data.metrics.aging.sagging)} 
+                      />
+                      <span className="text-xs sm:text-sm text-gray-700">Sagging</span>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-700">Eye Area Condition</span>
-                      <div className="flex items-center gap-3">
-                        <CircularProgress 
-                          score={data.metrics.aging.eyeArea} 
-                          size={50} 
-                          strokeWidth={4} 
-                          color={getScoreColor(data.metrics.aging.eyeArea)} 
-                        />
-                        <span className="text-sm font-medium">{data.metrics.aging.eyeArea}</span>
-                      </div>
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <CircularProgress 
+                        score={data.metrics.aging.eyeArea} 
+                        size={40} 
+                        strokeWidth={3} 
+                        color={getScoreColor(data.metrics.aging.eyeArea)} 
+                      />
+                      <span className="text-xs sm:text-sm text-gray-700">Eye Area Condition</span>
                     </div>
                   </div>
+                  {/* Vertical separator */}
+                  <div className="absolute right-0 top-0 bottom-0 w-px bg-gray-200 hidden sm:block"></div>
                 </div>
 
                 {/* Column 3: Skin Health & Radiance */}
                 <div>
-                  <h3 className="font-bold text-gray-900 mb-4">Skin Health & Radiance</h3>
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-700">Redness</span>
-                      <div className="flex items-center gap-3">
-                        <CircularProgress 
-                          score={data.metrics.health.redness} 
-                          size={50} 
-                          strokeWidth={4} 
-                          color={getScoreColor(data.metrics.health.redness)} 
-                        />
-                        <span className="text-sm font-medium">{data.metrics.health.redness}</span>
-                      </div>
+                  <h3 className="font-bold text-gray-900 mb-3 sm:mb-4 text-sm sm:text-base">Skin Health & Radiance</h3>
+                  <div className="space-y-3 sm:space-y-4">
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <CircularProgress 
+                        score={data.metrics.health.redness} 
+                        size={40} 
+                        strokeWidth={3} 
+                        color={getScoreColor(data.metrics.health.redness)} 
+                      />
+                      <span className="text-xs sm:text-sm text-gray-700">Redness</span>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-700">Hydration</span>
-                      <div className="flex items-center gap-3">
-                        <CircularProgress 
-                          score={data.metrics.health.hydration} 
-                          size={50} 
-                          strokeWidth={4} 
-                          color={getScoreColor(data.metrics.health.hydration)} 
-                        />
-                        <span className="text-sm font-medium">{data.metrics.health.hydration}</span>
-                      </div>
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <CircularProgress 
+                        score={data.metrics.health.hydration} 
+                        size={40} 
+                        strokeWidth={3} 
+                        color={getScoreColor(data.metrics.health.hydration)} 
+                      />
+                      <span className="text-xs sm:text-sm text-gray-700">Hydration</span>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-700">Uniformity</span>
-                      <div className="flex items-center gap-3">
-                        <CircularProgress 
-                          score={data.metrics.health.uniformity} 
-                          size={50} 
-                          strokeWidth={4} 
-                          color={getScoreColor(data.metrics.health.uniformity)} 
-                        />
-                        <span className="text-sm font-medium">{data.metrics.health.uniformity}</span>
-                      </div>
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <CircularProgress 
+                        score={data.metrics.health.uniformity} 
+                        size={40} 
+                        strokeWidth={3} 
+                        color={getScoreColor(data.metrics.health.uniformity)} 
+                      />
+                      <span className="text-xs sm:text-sm text-gray-700">Uniformity</span>
                     </div>
                   </div>
                 </div>
+
+                
               </div>
             </div>
           </div>
         </div>
 
         {/* Third Part: Personalized Action Plan */}
-        <div className="mb-12">
-          <div className="bg-white border border-gray-200 rounded-lg p-6">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
-                <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="mb-8 sm:mb-12">
+          <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6">
+            <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+              <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
               </div>
-              <h2 className="text-2xl font-bold text-gray-900">Personalized Action Plan</h2>
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Personalized Action Plan</h2>
             </div>
-            <p className="text-gray-600 mb-6">Your daily steps to achieving your skin goals</p>
+            <p className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">Your daily steps to achieving your skin goals</p>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
               {/* Daily Routine */}
               <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center">
-                    <svg className="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                  <div className="w-6 h-6 sm:w-8 sm:h-8 bg-yellow-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
                   </div>
-                  <h3 className="font-bold text-gray-900">Daily Routine</h3>
+                  <h3 className="font-bold text-gray-900 text-sm sm:text-base">Daily Routine</h3>
                 </div>
-                <div className="space-y-3">
+                <div className="space-y-2 sm:space-y-3">
                   {data.recommendations.dailyRoutine.map((item, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <div className="w-4 h-4 bg-gray-200 rounded-full"></div>
-                      <span className="text-sm text-gray-700">{item}</span>
+                    <div key={index} className="flex items-center gap-2 sm:gap-3">
+                      <div className="w-3 h-3 sm:w-4 sm:h-4 bg-gray-200 rounded-full"></div>
+                      <span className="text-xs sm:text-sm text-gray-700">{item}</span>
                     </div>
                   ))}
                 </div>
@@ -544,19 +518,19 @@ export default function AnalyticsPage() {
 
               {/* Weekly Actions */}
               <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
-                    <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                  <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                   </div>
-                  <h3 className="font-bold text-gray-900">Weekly Actions</h3>
+                  <h3 className="font-bold text-gray-900 text-sm sm:text-base">Weekly Actions</h3>
                 </div>
-                <div className="space-y-3">
+                <div className="space-y-2 sm:space-y-3">
                   {data.recommendations.weeklyActions.map((item, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <div className="w-4 h-4 bg-gray-200 rounded-full"></div>
-                      <span className="text-sm text-gray-700">{item}</span>
+                    <div key={index} className="flex items-center gap-2 sm:gap-3">
+                      <div className="w-3 h-3 sm:w-4 sm:h-4 bg-gray-200 rounded-full"></div>
+                      <span className="text-xs sm:text-sm text-gray-700">{item}</span>
                     </div>
                   ))}
                 </div>
@@ -564,17 +538,17 @@ export default function AnalyticsPage() {
 
               {/* Lifestyle Tips */}
               <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center">
-                    <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                  <div className="w-6 h-6 sm:w-8 sm:h-8 bg-red-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                     </svg>
                   </div>
-                  <h3 className="font-bold text-gray-900">Lifestyle Tips</h3>
+                  <h3 className="font-bold text-gray-900 text-sm sm:text-base">Lifestyle Tips</h3>
                 </div>
-                <div className="space-y-3">
+                <div className="space-y-2 sm:space-y-3">
                   {data.recommendations.lifestyleTips.map((item, index) => (
-                    <span key={index} className="block text-sm text-gray-700">{item}</span>
+                    <span key={index} className="block text-xs sm:text-sm text-gray-700">{item}</span>
                   ))}
                 </div>
               </div>
@@ -582,92 +556,67 @@ export default function AnalyticsPage() {
           </div>
         </div>
 
-        {/* Fourth Part: Recommended Products */}
-        <div className="mb-12">
-          <div className="bg-white border border-gray-200 rounded-lg p-6">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                </svg>
-              </div>
-              <h2 className="text-2xl font-bold text-gray-900">Recommended Products</h2>
-            </div>
-            <p className="text-gray-600 mb-6">Products selected by our AI to address your specific skin needs.</p>
-            
-            {/* Product Categories */}
-            <div className="flex items-center gap-8 mb-6">
-              {productCategories.map((category, index) => (
-                <div key={category} className="flex items-center gap-2">
-                  {index > 0 && <div className="w-px h-8 bg-gray-300"></div>}
-                  <button
-                    onClick={() => setActiveProductCategory(category)}
-                    className={`flex items-center gap-2 transition-all duration-200 ${
-                      activeProductCategory === category 
-                        ? 'opacity-100' 
-                        : 'opacity-50 hover:opacity-75'
-                    }`}
-                  >
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 ${
-                      activeProductCategory === category 
-                        ? 'bg-[#22747D]' 
-                        : 'border-2 border-gray-300'
-                    }`}>
-                      <svg className={`w-5 h-5 ${
-                        activeProductCategory === category 
-                          ? 'text-white' 
-                          : 'text-gray-400'
-                      }`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                      </svg>
-                    </div>
-                    <span className={`font-medium transition-colors duration-200 ${
-                      activeProductCategory === category 
-                        ? 'text-gray-900' 
-                        : 'text-gray-500'
-                    }`}>{category}</span>
-                  </button>
-                </div>
-              ))}
-            </div>
-
-            {/* Products Display */}
-            <div className="border-2 border-blue-500 rounded-lg p-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredProducts.map((product, index) => (
-                  <div key={index} className="bg-white border border-gray-200 rounded-lg p-4">
-                    <div className="w-full h-32 bg-gray-100 rounded-lg mb-3 flex items-center justify-center">
-                      <span className="text-gray-500 text-sm">Product Image</span>
-                    </div>
-                    <h4 className="font-semibold text-gray-900 text-sm mb-1">{product.name}</h4>
-                    <p className="text-gray-500 text-xs mb-2">{product.volume}</p>
-                    <p className="text-[#22747D] text-xs mb-3">{product.targetConcern}</p>
-                    <button className="w-full bg-[#22747D] text-white text-sm py-2 rounded-lg hover:bg-[#1a5a61] transition-colors">
-                      Learn more
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+                 {/* Fourth Part: Recommended Products */}
+         <div className="mb-8 sm:mb-12">
+           <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6">
+             <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+               <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+                 <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                 </svg>
+               </div>
+               <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Recommended Products</h2>
+             </div>
+             <p className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">Products selected by our AI to address your specific skin needs.</p>
+             
+             {/* Products Display - Horizontal Row */}
+             <div className="flex gap-3 sm:gap-4 overflow-x-auto pb-2">
+               {data.products.slice(0, 4).map((product, index) => (
+                 <div key={index} className="flex-shrink-0 w-56 sm:w-64 bg-gray-50 rounded-lg border border-gray-200 p-3 sm:p-4">
+                   {/* Product Image */}
+                   <div className="w-full h-24 sm:h-32 bg-gray-200 rounded-lg mb-2 sm:mb-3 flex items-center justify-center relative">
+                     <span className="text-gray-500 text-xs sm:text-sm">Product Image</span>
+                     {/* Rating Badge */}
+                     <div className="absolute top-1 sm:top-2 right-1 sm:right-2 bg-green-500 text-white text-xs px-1 sm:px-2 py-1 rounded border border-green-600">
+                       4.5★
+                     </div>
+                   </div>
+                   
+                   {/* Product Details */}
+                   <div className="space-y-1 sm:space-y-2">
+                     <h4 className="font-bold text-gray-900 text-xs sm:text-sm">Dermafique</h4>
+                     <p className="text-gray-700 text-xs sm:text-sm">Dermafique Body Lotion</p>
+                     <div className="text-green-600 font-bold text-xs sm:text-sm">54% OFF</div>
+                     <div className="flex items-center gap-1 sm:gap-2">
+                       <span className="text-gray-400 text-xs sm:text-sm line-through">₹506</span>
+                       <span className="text-gray-900 font-bold text-base sm:text-lg">₹450</span>
+                     </div>
+                     <button className="w-full bg-green-700 text-white font-bold py-1.5 sm:py-2 rounded-lg hover:bg-green-800 transition-colors text-xs sm:text-sm">
+                       Buy Now
+                     </button>
+                   </div>
+                 </div>
+               ))}
+             </div>
+           </div>
+         </div>
 
         {/* Fifth Part: Persuasion to Talk to Dermatologist */}
-        <div className="mb-12">
-          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div className="mb-8 sm:mb-12">
+          <div className="bg-gradient-to-r from-green-50 to-green-50 border border-green-200 rounded-lg p-6 sm:p-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-center">
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Your Journey to Glowing Skin Continues</h2>
-                <p className="text-gray-700 mb-6">Come back for a new analysis in 8-10 weeks to track your beautiful progress with pigmentation and hydration.</p>
-                <button className="flex items-center gap-2 px-6 py-3 bg-[#22747D] text-white rounded-lg hover:bg-[#1a5a61] transition-colors font-medium">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Your Journey to Glowing Skin Continues</h2>
+                <p className="text-gray-700 mb-4 sm:mb-6 text-sm sm:text-base">Come back for a new analysis in 8-10 weeks to track your beautiful progress with pigmentation and hydration.</p>
+                <button className="flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-[#007237] text-white rounded-lg hover:bg-[#00662f] transition-colors font-medium text-sm sm:text-base">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                   </svg>
                   Talk to Dermatologist
                 </button>
               </div>
               <div className="hidden lg:block">
-                <div className="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center">
+                <div className="w-full h-48 sm:h-64 bg-gray-200 rounded-lg flex items-center justify-center">
                   <span className="text-gray-500">Professional Consultation Image</span>
                 </div>
               </div>

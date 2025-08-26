@@ -118,7 +118,7 @@ export default function Home() {
 
               <p className="mt-4 sm:mt-5 text-xs text-[#6B7280] text-center px-2">
                 Don&apos;t want to use a photo? {" "}
-                <a href="#" className="text-[#007237] underline">Take our questionnaire instead.</a>
+                <a href="/questionnaire" className="text-[#007237] underline">Take our questionnaire instead.</a>
               </p>
               
               {/* Test Analytics Link - Remove in production */}

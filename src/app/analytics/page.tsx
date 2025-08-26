@@ -228,7 +228,7 @@ export default function AnalyticsPage() {
                 <span className="hidden sm:inline">Download Report</span>
                 <span className="sm:hidden">Download</span>
               </button>
-              <button className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-[#007237] text-white rounded-lg hover:bg-[#00662f] transition-colors text-sm">
+              <button onClick={() => router.push('/consultations')} className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-[#007237] text-white rounded-lg hover:bg-[#00662f] transition-colors text-sm">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                 </svg>
@@ -354,10 +354,10 @@ export default function AnalyticsPage() {
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Overall Skin Health</h2>
             </div>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+            <div className="flex flex-col lg:flex-row items-start gap-4 sm:gap-6">
               {/* Visual Representation */}
               <div className="relative">
-                <div className="w-full max-w-sm sm:w-80 h-40 sm:h-50 bg-gray-100 rounded-lg border border-gray-200 flex items-center justify-center">
+                <div className="w-40 sm:w-48 h-40 sm:h-48 bg-gray-100 rounded-lg border border-gray-200 flex items-center justify-center">
                   <div className="text-center text-gray-500">
                     <svg className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -369,11 +369,11 @@ export default function AnalyticsPage() {
               </div>
 
               {/* Skin Health Metrics */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                 {/* Column 1: Skin Clarity & Texture */}
                 <div className="relative">
                   <h3 className="font-bold text-gray-900 mb-3 sm:mb-4 text-sm sm:text-base">Skin Clarity & Texture</h3>
-                  <div className="space-y-3 sm:space-y-4">
+                  <div className="space-y-3 md:space-y-4">
                     <div className="flex items-center gap-2 sm:gap-3">
                       <CircularProgress 
                         score={data.metrics.skinClarity.pores} 
@@ -409,7 +409,7 @@ export default function AnalyticsPage() {
                 {/* Column 2: Signs of Aging */}
                 <div className="relative">
                   <h3 className="font-bold text-gray-900 mb-3 sm:mb-4 text-sm sm:text-base">Signs of Aging</h3>
-                  <div className="space-y-3 sm:space-y-4">
+                  <div className="space-y-3 md:space-y-4">
                     <div className="flex items-center gap-2 sm:gap-3">
                       <CircularProgress 
                         score={data.metrics.aging.wrinkles} 
@@ -445,7 +445,7 @@ export default function AnalyticsPage() {
                 {/* Column 3: Skin Health & Radiance */}
                 <div>
                   <h3 className="font-bold text-gray-900 mb-3 sm:mb-4 text-sm sm:text-base">Skin Health & Radiance</h3>
-                  <div className="space-y-3 sm:space-y-4">
+                  <div className="space-y-3 md:space-y-4">
                     <div className="flex items-center gap-2 sm:gap-3">
                       <CircularProgress 
                         score={data.metrics.health.redness} 
@@ -608,7 +608,7 @@ export default function AnalyticsPage() {
               <div>
                 <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Your Journey to Glowing Skin Continues</h2>
                 <p className="text-gray-700 mb-4 sm:mb-6 text-sm sm:text-base">Come back for a new analysis in 8-10 weeks to track your beautiful progress with pigmentation and hydration.</p>
-                <button className="flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-[#007237] text-white rounded-lg hover:bg-[#00662f] transition-colors font-medium text-sm sm:text-base">
+                <button onClick={() => router.push('/consultations')} className="flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-[#007237] text-white rounded-lg hover:bg-[#00662f] transition-colors font-medium text-sm sm:text-base">
                   <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                   </svg>

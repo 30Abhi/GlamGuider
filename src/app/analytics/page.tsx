@@ -211,7 +211,7 @@ export default function AnalyticsPage() {
           {/* Main Title and Action Buttons */}
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6 sm:mb-8">
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 lg:mb-0">
-              Hi {data.user.name}, Here's Your <span className="underline decoration-blue-500 decoration-2">Skin Report</span>
+              Hi , Here's Your Skin Report
             </h1>
             <div className="flex flex-col sm:flex-row gap-3">
               <div className="flex flex-row gap-3">

@@ -14,8 +14,12 @@ export default function CapturePage() {
   const streamRef = useRef<MediaStream | null>(null);
 
   useEffect(() => {
-    startCamera();
+    const timer = setTimeout(() => {
+      startCamera();
+    }, 100);
+    
     return () => {
+      clearTimeout(timer);
       stopCamera();
     };
   }, []);
@@ -79,8 +83,6 @@ export default function CapturePage() {
       setIsLoading(true);
     }
   };
-
-
 
   if (isLoading) {
     return <LoadingScreen  />;
@@ -181,7 +183,7 @@ export default function CapturePage() {
               <button
                 onClick={captureSelfie}
                 disabled={!isCameraActive}
-                className={`px-6 sm:px-8 py-2 sm:py-3 rounded-full text-base sm:text-lg font-medium transition-colors ${
+                className={`px-6 sm:px-8 py-2 sm:py-3 rounded-full text-base sm:text-lg font-medium transition-colors mb-3 ${
                   isCameraActive
                     ? 'bg-[#007237] text-white hover:bg-[#00662f]'
                     : 'bg-gray-300 text-gray-500 cursor-not-allowed'
@@ -203,4 +205,4 @@ export default function CapturePage() {
       </div>
     </div>
   );
-}
+} 

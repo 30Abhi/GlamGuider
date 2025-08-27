@@ -84,7 +84,7 @@ export default function Home() {
               <div className="mx-auto h-24 w-24 sm:h-[139px] sm:w-[149px] grid place-items-center mb-4 sm:mb-6">
                 {/* placeholder for scan/face thumbnail */}
                 <div className="h-24 w-24 sm:h-[139px] sm:w-[149px] rounded bg-white border border-dashed border-gray-300 grid place-items-center">
-                  <img src="https://freesvg.org/img/Low-Poly-Female-Head-Wireframe.png" alt="Female head wireframe" className="h-full w-full text-gray-400" />
+                  <img src="/landingpageskullframe.png" alt="Female head wireframe" className="h-full w-full text-gray-400" />
                    
                  
                 </div>

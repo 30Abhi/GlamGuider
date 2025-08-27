@@ -214,26 +214,28 @@ export default function AnalyticsPage() {
               Hi {data.user.name}, Here's Your <span className="underline decoration-blue-500 decoration-2">Skin Report</span>
             </h1>
             <div className="flex flex-col sm:flex-row gap-3">
-              <button className="flex items-center gap-2 px-3 sm:px-4 py-2 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition-colors text-sm">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                </svg>
-                <span className="hidden sm:inline">Retake Analysis</span>
-                <span className="sm:hidden">Retake</span>
-              </button>
-              <button className="flex items-center gap-2 px-3 sm:px-4 py-2 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition-colors text-sm">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                <span className="hidden sm:inline">Download Report</span>
-                <span className="sm:hidden">Download</span>
-              </button>
+              <div className="flex flex-row gap-3">
+                <button className="flex items-center gap-2 px-3 sm:px-4 py-2 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition-colors text-sm">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                  <span className="hidden sm:inline">Retake Analysis</span>
+                  <span className="sm:hidden">Retake</span>
+                </button>
+                <button className="flex items-center gap-2 px-3 sm:px-4 py-2 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition-colors text-sm">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  <span className="hidden sm:inline">Download Report</span>
+                  <span className="sm:hidden">Download</span>
+                </button>
+              </div>
               <button onClick={() => router.push('/consultations')} className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-[#007237] text-white rounded-lg hover:bg-[#00662f] transition-colors text-sm">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                 </svg>
                 <span className="hidden sm:inline">Talk to Dermatologist</span>
-                <span className="sm:hidden">Talk to Derm</span>
+                <span className="sm:hidden">Talk to Dermatologist</span>
               </button>
             </div>
           </div>
@@ -243,41 +245,41 @@ export default function AnalyticsPage() {
             <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-6 sm:mb-8">Your Skin at a Glance</h2>
                          <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6">
                {/* Overall Skin Health Score */}
-               <div className="lg:col-span-2 bg-white border border-gray-200 rounded-lg p-3 sm:p-4">
-                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                   <div className="relative w-20 h-12 sm:w-24 sm:h-16 mx-auto sm:mx-0 mb-3 sm:mb-0"> {/* keep original size */}
-                     <svg className="w-20 h-12 sm:w-24 sm:h-16" viewBox="0 0 120 60">
-                       {/* Background arc */}
-                       <path
-                         d="M10,60 A50,50 0 0,1 110,60"
-                         fill="none"
-                         stroke="#e5e7eb"
-                         strokeWidth="10"
-                       />
-                       {/* Progress arc */}
-                       <path
-                         d="M10,60 A50,50 0 0,1 110,60"
-                         fill="none"
-                         stroke="url(#gradient)"
-                         strokeWidth="10"
-                         strokeDasharray="157"
-                         strokeDashoffset={157 - (data.user.overallScore / 100) * 157}
-                         strokeLinecap="round"
-                       />
-                       <defs>
-                         <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                           <stop offset="0%" stopColor="#007237" />
-                           <stop offset="100%" stopColor="#4CAF50" />
-                         </linearGradient>
-                       </defs>
-                     </svg>
-                     {/* Move score downward */}
-                     <div className="absolute inset-0 flex items-end justify-center pb-1">
-                       <span className="text-lg sm:text-xl font-bold text-gray-900">
-                         {data.user.overallScore}
-                       </span>
-                     </div>
-                   </div>
+                               <div className="lg:col-span-2 bg-white border border-gray-200 rounded-lg p-3 sm:p-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                    <div className="relative w-28 h-16 sm:w-32 sm:h-20 mx-auto sm:mx-0 mb-3 sm:mb-0"> {/* increased size */}
+                      <svg className="w-28 h-16 sm:w-32 sm:h-20" viewBox="0 0 120 60">
+                        {/* Background arc */}
+                        <path
+                          d="M10,60 A50,50 0 0,1 110,60"
+                          fill="none"
+                          stroke="#e5e7eb"
+                          strokeWidth="12"
+                        />
+                        {/* Progress arc */}
+                        <path
+                          d="M10,60 A50,50 0 0,1 110,60"
+                          fill="none"
+                          stroke="url(#gradient)"
+                          strokeWidth="12"
+                          strokeDasharray="157"
+                          strokeDashoffset={157 - (data.user.overallScore / 100) * 157}
+                          strokeLinecap="round"
+                        />
+                        <defs>
+                          <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stopColor="#007237" />
+                            <stop offset="100%" stopColor="#4CAF50" />
+                          </linearGradient>
+                        </defs>
+                      </svg>
+                      {/* Move score downward */}
+                      <div className="absolute inset-0 flex items-end justify-center pb-1">
+                        <span className="text-xl sm:text-2xl font-bold text-gray-900">
+                          {data.user.overallScore}
+                        </span>
+                      </div>
+                    </div>
 
                    <div className="flex-1 sm:ml-3 text-center sm:text-left">
                      <h3 className="font-bold text-gray-900 mb-1 text-sm">
@@ -298,9 +300,8 @@ export default function AnalyticsPage() {
                    <div className="relative">
                      <div className="flex items-center gap-2 sm:gap-3 mb-2">
                        <div className="w-5 h-5 sm:w-6 sm:h-6 bg-blue-100 rounded-full flex items-center justify-center">
-                         <svg className="w-3 h-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                         </svg>
+                       <img src="/detectyourskintype.png" alt="Detect your skin type" className="w-3 h-3" />
+
                        </div>
                        <h3 className="font-bold text-gray-900 text-xs sm:text-sm">Your Detected Skin Type</h3>
                      </div>
@@ -313,9 +314,8 @@ export default function AnalyticsPage() {
                    <div className="relative">
                      <div className="flex items-center gap-2 sm:gap-3 mb-2">
                        <div className="w-5 h-5 sm:w-6 sm:h-6 bg-red-100 rounded-full flex items-center justify-center">
-                         <svg className="w-3 h-3 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
-                         </svg>
+                       <img src="/primaryconcern.png" alt="Detect your skin type" className="w-3 h-3" />
+
                        </div>
                        <h3 className="font-bold text-gray-900 text-xs sm:text-sm">Primary Concern</h3>
                      </div>
@@ -328,9 +328,8 @@ export default function AnalyticsPage() {
                    <div>
                      <div className="flex items-center gap-2 sm:gap-3 mb-2">
                        <div className="w-5 h-5 sm:w-6 sm:h-6 bg-yellow-100 rounded-full flex items-center justify-center">
-                         <svg className="w-4 h-4 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
-                         </svg>
+                       <img src="/secondaryconcerns.png" alt="Detect your skin type" className="w-3 h-3" />
+
                        </div>
                        <h3 className="font-bold text-gray-900 text-xs sm:text-sm">Secondary Concerns</h3>
                      </div>
@@ -487,9 +486,8 @@ export default function AnalyticsPage() {
           <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6">
             <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
               <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gray-100 rounded-lg flex items-center justify-center">
-                <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
+              <img src="/personalizedactionplan.png" alt="Personalized action plan" className="w-4 h-4 sm:w-5 sm:h-5" />
+
               </div>
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Personalized Action Plan</h2>
             </div>
@@ -500,9 +498,8 @@ export default function AnalyticsPage() {
               <div>
                 <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
                   <div className="w-6 h-6 sm:w-8 sm:h-8 bg-yellow-100 rounded-lg flex items-center justify-center">
-                    <svg className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
+                  <img src="/dailyroutine.png" alt="Daily routine" className="w-4 h-4 sm:w-5 sm:h-5" />
+
                   </div>
                   <h3 className="font-bold text-gray-900 text-sm sm:text-base">Daily Routine</h3>
                 </div>
@@ -520,9 +517,8 @@ export default function AnalyticsPage() {
               <div>
                 <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
                   <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gray-100 rounded-lg flex items-center justify-center">
-                    <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
+                  <img src="/weeklyaction.png" alt="Detect your skin type" className="w-3 h-3" />
+
                   </div>
                   <h3 className="font-bold text-gray-900 text-sm sm:text-base">Weekly Actions</h3>
                 </div>
@@ -540,9 +536,8 @@ export default function AnalyticsPage() {
               <div>
                 <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
                   <div className="w-6 h-6 sm:w-8 sm:h-8 bg-red-100 rounded-lg flex items-center justify-center">
-                    <svg className="w-4 h-4 sm:w-5 sm:h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                    </svg>
+                  <img src="/lifestyletipes.png" alt="Detect your skin type" className="w-3 h-3" />
+
                   </div>
                   <h3 className="font-bold text-gray-900 text-sm sm:text-base">Lifestyle Tips</h3>
                 </div>
@@ -561,9 +556,8 @@ export default function AnalyticsPage() {
            <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6">
              <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
                <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gray-100 rounded-lg flex items-center justify-center">
-                 <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                 </svg>
+               <img src="/recommendedproducts.png" alt="Recommended products" className="w-4 h-4 sm:w-5 sm:h-5" />
+
                </div>
                <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Recommended Products</h2>
              </div>
@@ -608,12 +602,14 @@ export default function AnalyticsPage() {
               <div>
                 <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Your Journey to Glowing Skin Continues</h2>
                 <p className="text-gray-700 mb-4 sm:mb-6 text-sm sm:text-base">Come back for a new analysis in 8-10 weeks to track your beautiful progress with pigmentation and hydration.</p>
-                <button onClick={() => router.push('/consultations')} className="flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-[#007237] text-white rounded-lg hover:bg-[#00662f] transition-colors font-medium text-sm sm:text-base">
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                  </svg>
-                  Talk to Dermatologist
-                </button>
+                      <button onClick={() => router.push('/consultations')} className="flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-[#007237] text-white rounded-lg hover:bg-[#00662f] transition-colors font-medium text-sm sm:text-base">
+                   <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                   </svg>
+                   <span className="hidden sm:inline">Talk to Dermatologist</span>
+                   <span className="sm:hidden">Talk to Dermatologist</span>
+                 
+                 </button>
               </div>
               <div className="hidden lg:block">
                 <div className="w-full h-48 sm:h-64 bg-gray-200 rounded-lg flex items-center justify-center">
